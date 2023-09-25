@@ -71,12 +71,12 @@ def send_req(web, method):
     while True:
         try:
             if method == "post":
-                get(www)
+                r = get(www)
 
             elif method == "get":
-                post(www)
+                r = post(www)
 
-            print(f"[+] REQ -> {web} | [{h}:{m} {p}][{method.upper()}]")
+            print(f"[+] REQ -> {web} | [{h}:{m} {p}][{method.upper()}][{r.status_code}][{len(r.text)}]");
             break
 
         except Exception as e:
