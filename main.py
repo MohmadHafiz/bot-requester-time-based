@@ -40,10 +40,10 @@ thred_runnin = [
         "min":7, "max":9, "t":[5,10], "p": "PM"
     },
     {
-        "min":10, "max":11, "t":[2,5], "p": "PM"
+        "min":10, "max":12, "t":[2,5], "p": "PM"
     },
     {
-        "min":12, "max":5, "t":[1,3], "p": "AM"
+        "min":1, "max":5, "t":[1,3], "p": "AM"
     },
 ]
 
@@ -65,7 +65,6 @@ def send_req(web, method):
 
     h, m, p = get_time()
     sleep(randint(5, 10))
-    print(f"[+] REQ -> {web} | [{h}:{m} {p}][{method.upper()}]")
 
     err = False
     no_err = 0
@@ -73,16 +72,19 @@ def send_req(web, method):
         try:
             if method == "post":
                 get(www)
-                break
 
             elif method == "get":
                 post(www)
-                break
+
+            print(f"[+] REQ -> {web} | [{h}:{m} {p}][{method.upper()}]")
+            break
 
         except Exception as e:
             # print(e)
             # err = True
-            # no_err += 1
+            no_err += 1
+            if no_err >= 3:
+                print(f"[!] DOWN? -> {web}")
             # Errs += 1
             sleep(3)
     
